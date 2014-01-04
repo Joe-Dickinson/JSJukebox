@@ -3,5 +3,17 @@ html {
 }
 
 .artist_title {
-  
+
 }
+
+#more_info {
+  display: none;
+  background-color: purple;
+  color: black;
+  width: 500px;
+  height: 500px; 
+}
+
+
+
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html >
 <html>
   <head>
-    <link rel="stylesheet" href="css/jsjukebox.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jsjukebox.css"/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>My Amazing SoundCloud Catalog</title>
@@ -15,19 +15,21 @@
     <input type="text" id="search" onchange="doSearch()" />
 
     <div id="catalog">
+    </div>
 
+    <div id="text_here">
     </div>
 
     <div class="artist_title">
     </div>
 
-    <div id="image">
+    <div id="image"> 
     </div>
 
     <script>
-      // SC.initialize({
-      //   client_id: '1095f96607286f7aa1994f523a706996'
-      // });
+      function more() {
+        console.log("More information!") 
+      }
 
       function doSearch() {
         var searchTerm = document.getElementById('search').value;
@@ -49,11 +51,18 @@
             var artwork = tracks[0].getElementsByTagName("artwork-url");
             artwork = artwork[0];
             artwork = artwork.childNodes[0].textContent;
-            var image = document.getElementById("catalog"); //does not work with "image"
-            // console.log(image, artwork);
+            var image = document.getElementById("catalog"); 
+
             var image_content = document.createElement("img");
             image_content.setAttribute("src", artwork);
             image.appendChild(image_content);
+            var more_info = document.createElement("div");
+            more_info.setAttribute("id", "more_info");
+
+            var description = tracks[0].getElementsByTagName("description");
+            description = description[0].textContent;
+            document.getElementById("text_here").innerHTML = (description);
+
             t = false;
             }
 
@@ -63,20 +72,7 @@
         request.open('GET', 'http://api.soundcloud.com/tracks?client_id=1095f96607286f7aa1994f523a706996&q=' + searchTerm);
         request.send();
 
-        // var searchTerm2 = searchTerm.getElementById("title");
-        // console.log(searchTerm2);
         console.log(searchTerm);
-
-
-        // SC.get('/tracks', { q: searchTerm, license: 'cc-by-sa' }, function(tracks) {
-        //   for(track in tracks) {
-        //     console.log(tracks[track]);
-        //   }
-        // });
-
-        // var artwork = tracks[0].getElementsByTagName("artwork-url");
-        // artwork = artwork[0];
-        // artwork = artwork.childNodes[0];
       };
     </script>
   </body>
